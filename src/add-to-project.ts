@@ -49,6 +49,11 @@ export async function addToProject(): Promise<void> {
 
   const octokit = github.getOctokit(ghToken)
 
+  core.info(github.context)
+  core.info('Events:')
+  core.info(github.event)
+
+
   const issue = github.context.payload.issue ?? github.context.payload.pull_request ?? github.event.client_payload.command.resource
   const issueLabels: string[] = (issue?.labels ?? []).map((l: {name: string}) => l.name.toLowerCase())
   const issueOwnerName = github.context.payload.repository?.owner.login
