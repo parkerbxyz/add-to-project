@@ -1,10 +1,6 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
-core.info(github.context)
-core.info('Events:')
-core.info(github.event)
-
 // TODO: Ensure this (and the Octokit client) works for non-github.com URLs, as well.
 // https://github.com/orgs|users/<ownerName>/projects/<projectNumber>
 const urlParse =
@@ -123,6 +119,10 @@ export async function addToProject(): Promise<void> {
   // add a project item. Otherwise, we add a draft issue.
   if (issueOwnerName === projectOwnerName) {
     core.info('Creating project item')
+    core.info('GitHub context:')
+    core.info(github.context)
+    core.info('GitHub event:')
+    core.info(github.event)
 
     const addResp = await octokit.graphql<ProjectAddItemResponse>(
       `mutation addIssueToProject($input: AddProjectV2ItemByIdInput!) {
