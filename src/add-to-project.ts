@@ -1,14 +1,14 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
+core.info(github.context)
+core.info('Events:')
+core.info(github.event)
+
 // TODO: Ensure this (and the Octokit client) works for non-github.com URLs, as well.
 // https://github.com/orgs|users/<ownerName>/projects/<projectNumber>
 const urlParse =
   /^(?:https:\/\/)?github\.com\/(?<ownerType>orgs|users)\/(?<ownerName>[^/]+)\/projects\/(?<projectNumber>\d+)/
-
-  core.info(github.context)
-  core.info('Events:')
-  core.info(github.event)
 
 interface ProjectNodeIDResponse {
   organization?: {
