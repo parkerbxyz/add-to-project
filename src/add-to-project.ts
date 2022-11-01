@@ -6,6 +6,10 @@ import * as github from '@actions/github'
 const urlParse =
   /^(?:https:\/\/)?github\.com\/(?<ownerType>orgs|users)\/(?<ownerName>[^/]+)\/projects\/(?<projectNumber>\d+)/
 
+  core.info(github.context)
+  core.info('Events:')
+  core.info(github.event)
+
 interface ProjectNodeIDResponse {
   organization?: {
     projectV2: {
@@ -48,10 +52,6 @@ export async function addToProject(): Promise<void> {
   const labelOperator = core.getInput('label-operator').trim().toLocaleLowerCase()
 
   const octokit = github.getOctokit(ghToken)
-
-  core.info(github.context)
-  core.info('Events:')
-  core.info(github.event)
 
 
   const issue = github.context.payload.issue ?? github.context.payload.pull_request ?? github.event.client_payload.command.resource
