@@ -118,11 +118,7 @@ export async function addToProject(): Promise<void> {
   // If the issue has the same owner as the project, we can directly
   // add a project item. Otherwise, we add a draft issue.
   if (issueOwnerName === projectOwnerName) {
-    core.info('Creating project item')
-    core.info('GitHub context:')
-    core.info(github.context)
-    core.info('GitHub event:')
-    core.info(github.event)
+    core.info('Creating project item' + github.context + github.event)
 
     const addResp = await octokit.graphql<ProjectAddItemResponse>(
       `mutation addIssueToProject($input: AddProjectV2ItemByIdInput!) {
